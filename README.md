@@ -30,5 +30,8 @@ El proyecto está dividido en tres módulos:
 4. Ejecutar el archivo principal del proyecto (`Main.java`), el cual inicializa el menú de interacción para los tres módulos.
 5. La interfaz utiliza la clase `JOptionPane` para las interacciones con el usuario.
 
+---
 
+## Avances
+1. Primer avance: https://www.youtube.com/watch?v=e_OtYcyIm8Q
 
