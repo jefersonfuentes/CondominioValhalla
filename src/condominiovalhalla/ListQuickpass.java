@@ -23,7 +23,7 @@ public class ListQuickpass {
         cupo = tamanno;
     }
 
-   public void agregarQuickpass() {
+    public void agregarQuickpass() {
         if (cupo > 0) {
             String filial;
             do {
@@ -66,8 +66,6 @@ public class ListQuickpass {
         }
     }
 
-
-    
     //Cambiar estado
     /*
      public void cambiarEstado() {
@@ -81,9 +79,6 @@ public class ListQuickpass {
             JOptionPane.showMessageDialog(null, "Estado cambiado a: " + estado);
         }
     }*/
-
-
-
     // Mostrar la lista completa
     public void mostrarQuickpass() {
         StringBuilder listado = new StringBuilder("Listado de Quickpass:\n");
@@ -117,7 +112,7 @@ public class ListQuickpass {
         JOptionPane.showMessageDialog(null, "No se encontró un Quickpass con el código proporcionado.");
         return null;
     }
-    
+
     public void registrarEnArchivo(Quickpass quickpass, String condicion) {
         String archivo = "Historial.txt";
         LocalDateTime fechaHora = LocalDateTime.now();
@@ -131,4 +126,60 @@ public class ListQuickpass {
             JOptionPane.showMessageDialog(null, "Error al guardar en el archivo: " + e.getMessage());
         }
     }
+
+    public void eliminarPorCodigo(String codigo, ListQuickpass eliminados) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null && lista[i].getCodigo().equals(codigo)) {
+                eliminados.agregarDesde(lista[i]); // Mover a eliminados
+                lista[i] = null; // Eliminar del arreglo actual
+                cupo++;
+                JOptionPane.showMessageDialog(null, "Quickpass eliminado exitosamente.");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "No se encontró un Quickpass con el código proporcionado.");
+    }
+
+    public void eliminarPorPlaca(String placa, ListQuickpass eliminados) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null && lista[i].getPlaca().equals(placa)) {
+                eliminados.agregarDesde(lista[i]); // Mover a eliminados
+                lista[i] = null; // Eliminar del arreglo actual
+                cupo++;
+                JOptionPane.showMessageDialog(null, "Quickpass eliminado exitosamente.");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "No se encontró un Quickpass con la placa proporcionada.");
+    }
+
+    public void agregarDesde(Quickpass quickpass) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] == null) {
+                lista[i] = quickpass;
+                cupo--;
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "No hay espacio disponible para agregar el Quickpass.");
+    }
+
+    public void inactivarQuickpass(String codigo) {
+        Quickpass quickpass = buscarQuickpass(codigo);
+        if (quickpass != null && quickpass.getEstado() == Estado.Activo) {
+            quickpass.setEstado(Estado.Inactivo);
+            JOptionPane.showMessageDialog(null, "Quickpass inactivado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Quickpass no encontrado o ya inactivo.");
+        }
+    }
+
+    public String validarAcceso(String codigo) {
+        Quickpass quickpass = buscarQuickpass(codigo);
+        if (quickpass != null && quickpass.getEstado() == Estado.Activo) {
+            return "Aceptado";
+        }
+        return "Rechazado";
+    }
+
 }
