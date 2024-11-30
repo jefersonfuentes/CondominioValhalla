@@ -10,3 +10,4 @@ Código: 1014567890; Placa: H123; Filial: jfg; Condición: Aceptado; Fecha: 29/1
 Código: 1014567891; Placa: 523; Filial: AAA; Condición: Aceptado; Fecha: 29/11/2024 18:19
 Código: 1014567892; Placa: 1234567; Filial: JFG; Condición: Aceptado; Fecha: 29/11/2024 18:24
 Código: 1014567890; Placa: 53B; Filial: JFG; Condición: Aceptado; Fecha: 29/11/2024 18:29
+Código: 1014567891; Placa: 53b; Filial: AAA; Condición: Aceptado; Fecha: 29/11/2024 19:36

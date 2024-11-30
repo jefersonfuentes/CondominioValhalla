@@ -12,8 +12,8 @@ public class CondominioValhalla {
     public static void main(String[] args) {
         // Crear las listas de Quickpass
         ListQuickpass activos = new ListQuickpass(10); // Lista de Quickpass activos
-        ListQuickpass eliminados = new ListQuickpass(10); // Lista de Quickpass eliminados
-        HistorialAccesos historial = new HistorialAccesos();  // Añadir esta línea
+        ListQuickpass eliminados = new ListQuickpass(20); // Lista de Quickpass eliminados
+        HistorialAccesos historial = new HistorialAccesos(); 
 
         int opcion;
         do {

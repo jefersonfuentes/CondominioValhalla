@@ -66,19 +66,7 @@ public class ListQuickpass {
         }
     }
 
-    //Cambiar estado
-    /*
-     public void cambiarEstado() {
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea cambiar el estado del Quickpass?");
-        if (respuesta == JOptionPane.YES_OPTION) {
-            if (estado == Estado.Activo) {
-                estado = Estado.Inactivo;
-            } else {
-                estado = Estado.Activo;
-            }
-            JOptionPane.showMessageDialog(null, "Estado cambiado a: " + estado);
-        }
-    }*/
+
     // Mostrar la lista completa
     public void mostrarQuickpass() {
         StringBuilder listado = new StringBuilder("Listado de Quickpass:\n");
@@ -88,18 +76,6 @@ public class ListQuickpass {
             }
         }
         JOptionPane.showMessageDialog(null, listado.toString());
-    }
-
-    // Validar entrada de texto no vacía
-    private String valStringVacio(String param) {
-        String valor;
-        do {
-            valor = JOptionPane.showInputDialog("Ingrese el " + param + ":");
-            if (valor == null || valor.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "ERROR: El " + param + " no puede estar vacío.");
-            }
-        } while (valor == null || valor.trim().isEmpty());
-        return valor;
     }
 
     // Método para buscar Quickpass por código

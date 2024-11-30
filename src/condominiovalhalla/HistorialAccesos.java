@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package condominiovalhalla;
+
 import javax.swing.JOptionPane;
 import java.io.*;
 import java.time.LocalDate;
@@ -10,9 +11,10 @@ import java.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Strxky
+ * @author Andrew
+ * @author Kendall
+ * @author Janaikel
  */
-
 public class HistorialAccesos {
 
     private static final String ARCHIVO = "Historial.txt";
@@ -54,7 +56,8 @@ public class HistorialAccesos {
 
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split("; ");
-                for (String parte : partes) {
+                for (int i = 0; i < partes.length; i++) {
+                    String parte = partes[i];
                     if (parte.startsWith("Fecha: ")) {
                         String fecha = parte.substring(7, 17); // Extrae la fecha del formato "Fecha: 2/11/2024 14:40"
                         LocalDate fechaLinea = LocalDate.parse(fecha, formatter);
