@@ -56,8 +56,6 @@ public class ListQuickpass {
                     cupo--;
                     JOptionPane.showMessageDialog(null, "Quickpass agregado con éxito.");
 
-                    // Registrar en el archivo
-                    registrarEnArchivo(nuevoQuickpass, "Aceptado");
                     break;
                 }
             }
@@ -87,6 +85,21 @@ public class ListQuickpass {
         }
         JOptionPane.showMessageDialog(null, "No se encontró un Quickpass con el código proporcionado.");
         return null;
+    }
+    
+    public String validarAcceso(String codigo) {
+        Quickpass quickpass = buscarQuickpass(codigo);
+        String condicion;
+
+        if (quickpass != null && quickpass.getEstado() == Estado.Activo) {
+            condicion = "Aceptado";
+        } else {
+            condicion = "Rechazado";
+        }
+
+        registrarEnArchivo(quickpass, condicion);
+
+        return condicion;
     }
 
     public void registrarEnArchivo(Quickpass quickpass, String condicion) {
@@ -148,14 +161,6 @@ public class ListQuickpass {
         } else {
             JOptionPane.showMessageDialog(null, "Quickpass no encontrado o ya inactivo.");
         }
-    }
-
-    public String validarAcceso(String codigo) {
-        Quickpass quickpass = buscarQuickpass(codigo);
-        if (quickpass != null && quickpass.getEstado() == Estado.Activo) {
-            return "Aceptado";
-        }
-        return "Rechazado";
     }
 
 }
