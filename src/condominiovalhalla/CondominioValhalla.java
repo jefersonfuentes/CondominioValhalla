@@ -19,7 +19,7 @@ public class CondominioValhalla {
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog("********** MENU **********\n"
                     + "1. Agregar QuickPass\n"
-                    + "2. Mostrar información QuickPass activos:\n"
+                    + "2. Mostrar información QuickPass:\n"
                     + "3. Mostrar información QuickPass eliminados:\n"
                     + "4. Modificar un QuickPass\n"
                     + "5. Eliminar un QuickPass\n"
@@ -176,6 +176,5 @@ public class CondominioValhalla {
                     JOptionPane.showMessageDialog(null, "Opción no válida. Intente de nuevo.");
             }
         } while (opcion != 0);
-
     }
 }
