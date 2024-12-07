@@ -1,2 +1,5 @@
 Código: 1019999999; Placa: png; Filial: Fat; Condición: Aceptado; Fecha: 02/12/2024 17:02
 Código: 1019999999; Placa: png; Filial: Fat; Condición: Rechazado; Fecha: 02/12/2024 17:05
+Código: 1014567892; Placa: 754; Filial: HFG; Condición: Aceptado; Fecha: 06/12/2024 18:30
+Código: 1014567891; Placa: 1234; Filial: JFG; Condición: Aceptado; Fecha: 06/12/2024 18:31
+Código: 1014567891; Placa: 1234; Filial: JFG; Condición: Aceptado; Fecha: 06/12/2024 18:31

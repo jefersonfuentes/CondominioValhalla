@@ -13,22 +13,20 @@ public class CondominioValhalla {
         // Crear las listas de Quickpass
         ListQuickpass activos = new ListQuickpass(10); // Lista de Quickpass activos
         ListQuickpass eliminados = new ListQuickpass(20); // Lista de Quickpass eliminados
-        HistorialAccesos historial = new HistorialAccesos(); 
+        HistorialAccesos historial = new HistorialAccesos();
 
         int opcion;
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog("********** MENU **********\n"
                     + "1. Agregar QuickPass\n"
-                    + "2. Leer información de un QuickPass\n"
-                    + "3. Actualizar un QuickPass\n"
-                    + "4. Eliminar un QuickPass\n"
-                    + "5. Mostrar todos los QuickPass activos\n"
-                    + "6. Mostrar QuickPass eliminados\n"
-                    + "7. Inactivar un QuickPass\n"
-                    + "8. Validar acceso por código\n"
-                    + "9. Consultar historial por filial\n"
-                    + "10. Consultar historial por rango de fechas\n"
-                    + "11. Consultar historial por código o placa\n"
+                    + "2. Mostrar información QuickPass activos:\n"
+                    + "3. Mostrar información QuickPass eliminados:\n"
+                    + "4. Modificar un QuickPass\n"
+                    + "5. Eliminar un QuickPass\n"
+                    + "6. Inactivar un QuickPass\n"
+                    + "7. Activar un QuickPass\n"
+                    + "8. Registrar un acceso\n"
+                    + "9. Consultar historial:\n"
                     + "0. Salir\n"
                     + "Seleccione una opción:"));
 
@@ -37,94 +35,137 @@ public class CondominioValhalla {
                     activos.agregarQuickpass();
                     break;
 
-                case 2: // Leer información de un QuickPass
-                    String codigo = JOptionPane.showInputDialog("Ingrese el código del QuickPass a buscar:");
-                    Quickpass quickpassEncontrado = activos.buscarQuickpass(codigo);
-                    if (quickpassEncontrado != null) {
-                        JOptionPane.showMessageDialog(null, "Información del QuickPass:\n" + quickpassEncontrado);
+                case 2: // Mostrar información de QuickPass activos
+                    int subopcionActivos = Integer.parseInt(JOptionPane.showInputDialog("2. Mostrar información QuickPass activos:\n"
+                            + "   1. Mostrar Información de un QuickPass específico.\n"
+                            + "   2. Mostrar todos los QuickPass activos.\n"
+                            + "   3. Mostrar todos los QuickPass por filial.\n"
+                            + "Seleccione una opción:"));
+                    switch (subopcionActivos) {
+                        case 1:
+                            String codigoBuscar = JOptionPane.showInputDialog("Ingrese el código del QuickPass a buscar:");
+                            Quickpass encontrado = activos.buscarQuickpass(codigoBuscar);
+                            if (encontrado != null) {
+                                JOptionPane.showMessageDialog(null, "Información del QuickPass:\n" + encontrado);
+                            }
+                            break;
+                        case 2:
+                            activos.mostrarQuickpass();
+                            break;
+                        case 3:
+                            String filialBuscarActivos = JOptionPane.showInputDialog("Ingrese la filial para listar QuickPass:");
+                            activos.mostrarQuickpassPorFilial(filialBuscarActivos);
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Opción no válida.");
                     }
                     break;
 
-                case 3: // Actualizar un QuickPass
-                    String codigoActualizar = JOptionPane.showInputDialog("Ingrese el código del QuickPass a actualizar:");
-                    Quickpass quickpassActualizar = activos.buscarQuickpass(codigoActualizar);
+                case 3: // Mostrar información de QuickPass eliminados
+                    int subopcionEliminados = Integer.parseInt(JOptionPane.showInputDialog("3. Mostrar información QuickPass eliminados:\n"
+                            + "   1. Mostrar Información de un QuickPass específico.\n"
+                            + "   2. Mostrar todos los QuickPass eliminados.\n"
+                            + "   3. Mostrar todos los QuickPass por filial.\n"
+                            + "Seleccione una opción:"));
+                    switch (subopcionEliminados) {
+                        case 1:
+                            String codigoBuscarEliminados = JOptionPane.showInputDialog("Ingrese el código del QuickPass a buscar:");
+                            Quickpass encontradoEliminados = eliminados.buscarQuickpass(codigoBuscarEliminados);
+                            if (encontradoEliminados != null) {
+                                JOptionPane.showMessageDialog(null, "Información del QuickPass:\n" + encontradoEliminados);
+                            }
+                            break;
+                        case 2:
+                            eliminados.mostrarQuickpass();
+                            break;
+                        case 3:
+                            String filialBuscarEliminados = JOptionPane.showInputDialog("Ingrese la filial para listar QuickPass:");
+                            eliminados.mostrarQuickpassPorFilial(filialBuscarEliminados);
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Opción no válida.");
+                    }
+                    break;
 
-                    if (quickpassActualizar != null) {
-                        // Preguntar qué campo desea actualizar
-                        String opcActualizar = JOptionPane.showInputDialog("¿Qué desea actualizar?\n1. Placa\n2. Filial\n3. Código");
-
-                        switch (opcActualizar) {
-                            case "1": // Actualizar placa
+                case 4: // Modificar un QuickPass
+                    String codigoModificar = JOptionPane.showInputDialog("Ingrese el código del QuickPass a modificar:");
+                    Quickpass modificarQuickpass = activos.buscarQuickpass(codigoModificar);
+                    if (modificarQuickpass != null) {
+                        String campoModificar = JOptionPane.showInputDialog("¿Qué desea modificar?\n1. Placa\n2. Filial\n3. Código");
+                        switch (campoModificar) {
+                            case "1":
                                 String nuevaPlaca = JOptionPane.showInputDialog("Ingrese la nueva placa:");
-                                quickpassActualizar.setPlaca(nuevaPlaca);
+                                modificarQuickpass.setPlaca(nuevaPlaca);
                                 JOptionPane.showMessageDialog(null, "Placa actualizada con éxito.");
                                 break;
-
-                            case "2": // Actualizar filial
+                            case "2":
                                 String nuevaFilial = JOptionPane.showInputDialog("Ingrese la nueva filial:");
-                                quickpassActualizar.setFilial(nuevaFilial);
+                                modificarQuickpass.setFilial(nuevaFilial);
                                 JOptionPane.showMessageDialog(null, "Filial actualizada con éxito.");
                                 break;
-
-                            case "3": // Actualizar código
+                            case "3":
                                 String nuevoCodigo = JOptionPane.showInputDialog("Ingrese el nuevo código:");
-                                quickpassActualizar.setCodigo(nuevoCodigo);
+                                modificarQuickpass.setCodigo(nuevoCodigo);
                                 JOptionPane.showMessageDialog(null, "Código actualizado con éxito.");
                                 break;
-
                             default:
                                 JOptionPane.showMessageDialog(null, "Opción no válida.");
-                                break;
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "QuickPass no encontrado.");
                     }
                     break;
 
-                case 4: // Eliminar un QuickPass
-                    String opcionEliminar = JOptionPane.showInputDialog("¿Desea eliminar por:\n1. Código\n2. Placa");
-                    if (opcionEliminar.equals("1")) {
+                case 5: // Eliminar un QuickPass
+                    String tipoEliminar = JOptionPane.showInputDialog("¿Desea eliminar por:\n1. Código\n2. Placa");
+                    if (tipoEliminar.equals("1")) {
                         String codigoEliminar = JOptionPane.showInputDialog("Ingrese el código del QuickPass a eliminar:");
                         activos.eliminarPorCodigo(codigoEliminar, eliminados);
-                    } else if (opcionEliminar.equals("2")) {
+                    } else if (tipoEliminar.equals("2")) {
                         String placaEliminar = JOptionPane.showInputDialog("Ingrese la placa del QuickPass a eliminar:");
                         activos.eliminarPorPlaca(placaEliminar, eliminados);
                     }
                     break;
 
-                case 5: // Mostrar todos los QuickPass activos
-                    activos.mostrarQuickpass();
-                    break;
-
-                case 6: // Mostrar todos los QuickPass eliminados
-                    eliminados.mostrarQuickpass();
-                    break;
-
-                case 7: // Inactivar un QuickPass
+                case 6: // Inactivar un QuickPass
                     String codigoInactivar = JOptionPane.showInputDialog("Ingrese el código del QuickPass a inactivar:");
                     activos.inactivarQuickpass(codigoInactivar);
                     break;
 
-                case 8: // Validar acceso por código
-                    String codigoValidar = JOptionPane.showInputDialog("Ingrese el código del QuickPass para validar acceso:");
-                    String resultado = activos.validarAcceso(codigoValidar);
+                case 7: // Activar un QuickPass
+                    String codigoActivar = JOptionPane.showInputDialog("Ingrese el código del QuickPass a activar:");
+                    activos.activarQuickpass(codigoActivar);
+                    break;
+
+                case 8: // Registrar un acceso
+                    String codigoRegistrar = JOptionPane.showInputDialog("Ingrese el código del QuickPass para registrar acceso:");
+                    String resultado = activos.validarAcceso(codigoRegistrar);
                     JOptionPane.showMessageDialog(null, "Acceso: " + resultado);
                     break;
 
-                case 9: // Consultar historial por filial
-                    String filialConsulta = JOptionPane.showInputDialog("Ingrese la filial para consultar los accesos:");
-                    historial.consultarPorFilial(filialConsulta);
-                    break;
-
-                case 10: // Consultar historial por rango de fechas
-                    String fechaInicio = JOptionPane.showInputDialog("Ingrese la fecha de inicio (dd/MM/yyyy):");
-                    String fechaFin = JOptionPane.showInputDialog("Ingrese la fecha de fin (dd/MM/yyyy):");
-                    historial.consultarPorRangoFechas(fechaInicio, fechaFin);
-                    break;
-
-                case 11: // Consultar historial por código o placa
-                    String identificador = JOptionPane.showInputDialog("Ingrese el código o placa a consultar:");
-                    historial.consultarPorCodigoOPlaca(identificador);
+                case 9: // Consultar historial
+                    int subopcionHistorial = Integer.parseInt(JOptionPane.showInputDialog("9. Consultar historial:\n"
+                            + "   1. Consultar historial por filial.\n"
+                            + "   2. Consultar historial por rango de fechas.\n"
+                            + "   3. Consultar historial por código o placa.\n"
+                            + "Seleccione una opción:"));
+                    switch (subopcionHistorial) {
+                        case 1:
+                            String historialFilial = JOptionPane.showInputDialog("Ingrese la filial para consultar los accesos:");
+                            historial.consultarPorFilial(historialFilial);
+                            break;
+                        case 2:
+                            String fechaInicio = JOptionPane.showInputDialog("Ingrese la fecha de inicio (dd/MM/yyyy):");
+                            String fechaFin = JOptionPane.showInputDialog("Ingrese la fecha de fin (dd/MM/yyyy):");
+                            historial.consultarPorRangoFechas(fechaInicio, fechaFin);
+                            break;
+                        case 3:
+                            String identificador = JOptionPane.showInputDialog("Ingrese el código o placa a consultar:");
+                            historial.consultarPorCodigoOPlaca(identificador);
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Opción no válida.");
+                    }
                     break;
 
                 case 0: // Salir

@@ -64,7 +64,6 @@ public class ListQuickpass {
         }
     }
 
-
     // Mostrar la lista completa
     public void mostrarQuickpass() {
         StringBuilder listado = new StringBuilder("Listado de Quickpass:\n");
@@ -86,7 +85,7 @@ public class ListQuickpass {
         JOptionPane.showMessageDialog(null, "No se encontró un Quickpass con el código proporcionado.");
         return null;
     }
-    
+
     public String validarAcceso(String codigo) {
         Quickpass quickpass = buscarQuickpass(codigo);
         String condicion;
@@ -160,6 +159,34 @@ public class ListQuickpass {
             JOptionPane.showMessageDialog(null, "Quickpass inactivado con éxito.");
         } else {
             JOptionPane.showMessageDialog(null, "Quickpass no encontrado o ya inactivo.");
+        }
+    }
+
+    public void activarQuickpass(String codigo) {
+        Quickpass quickpass = buscarQuickpass(codigo);
+        if (quickpass != null && quickpass.getEstado() == Estado.Inactivo) {
+            quickpass.setEstado(Estado.Activo);
+            JOptionPane.showMessageDialog(null, "Quickpass Activado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Quickpass no encontrado o ya Activo.");
+        }
+    }
+
+    public void mostrarQuickpassPorFilial(String filial) {
+        StringBuilder listado = new StringBuilder("Listado de Quickpass para la filial: " + filial + "\n");
+        boolean encontrado = false;
+
+        for (int i = 0; i < lista.length; i++) { // Iteración clásica sobre el arreglo
+            if (lista[i] != null && lista[i].getFilial().equalsIgnoreCase(filial)) {
+                listado.append(lista[i].toString()).append("\n");
+                encontrado = true;
+            }
+        }
+
+        if (encontrado) {
+            JOptionPane.showMessageDialog(null, listado.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron Quickpass para la filial especificada.");
         }
     }
 
