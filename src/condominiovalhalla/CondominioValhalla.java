@@ -27,6 +27,7 @@ public class CondominioValhalla {
                     + "7. Activar un QuickPass\n"
                     + "8. Registrar un acceso\n"
                     + "9. Consultar historial:\n"
+                    + "10. Consultar historial:\n"
                     + "0. Salir\n"
                     + "Seleccione una opción:"));
 
@@ -167,6 +168,48 @@ public class CondominioValhalla {
                             JOptionPane.showMessageDialog(null, "Opción no válida.");
                     }
                     break;
+                    
+                case 10: // Consultar Reporte
+                    int subopcionReporte = Integer.parseInt(JOptionPane.showInputDialog("10. Consultar Reporte:\n"
+                            + "   1. Total de accesos registrados.\n"
+                            + "   2. Total de accesos por filial.\n"
+                            + "   3. Total de QuickPass registrados.\n"
+                            + "   4. Total de QuickPass activos e inactivos.\n"
+                            + "   5. Total de QuickPass eliminados.\n"
+                            + "Seleccione una opción:"));
+
+                    switch (subopcionReporte) {
+                        case 1: // Total de accesos registrados
+                            int totalAccesos = activos.obtenerTotalAccesos();
+                            JOptionPane.showMessageDialog(null, "Total de accesos registrados: " + totalAccesos);
+                            break;
+
+                        case 2: // Total de accesos por filial
+                            String filialReporte = JOptionPane.showInputDialog("Ingrese la filial para contar accesos:");
+                            int totalAccesosFilial = activos.obtenerTotalAccesosPorFilial(filialReporte);
+                            JOptionPane.showMessageDialog(null, "Total de accesos registrados para la filial " + filialReporte + ": " + totalAccesosFilial);
+                            break;
+
+                        case 3: // Total de QuickPass registrados
+                            int totalQuickpass = activos.obtenerTotalQuickpass();
+                            JOptionPane.showMessageDialog(null, "Total de QuickPass registrados: " + totalQuickpass);
+                            break;
+
+                        case 4: // Total de QuickPass activos e inactivos
+                            int[] estados = activos.obtenerQuickpassPorEstado();
+                            JOptionPane.showMessageDialog(null, "Total de QuickPass Activos: " + estados[0] + "\nTotal de QuickPass Inactivos: " + estados[1]);
+                            break;
+
+                        case 5: // Total de QuickPass eliminados
+                            int totalEliminados = activos.obtenerTotalQuickpassEliminados(eliminados);
+                            JOptionPane.showMessageDialog(null, "Total de QuickPass eliminados: " + totalEliminados);
+                            break;
+
+                        default:
+                            JOptionPane.showMessageDialog(null, "Opción no válida.");
+                    }
+                    break;
+
 
                 case 0: // Salir
                     JOptionPane.showMessageDialog(null, "Saliendo del sistema. ¡Hasta pronto!");

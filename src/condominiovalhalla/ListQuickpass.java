@@ -1,5 +1,7 @@
 package condominiovalhalla;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import javax.swing.JOptionPane;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -189,5 +191,67 @@ public class ListQuickpass {
             JOptionPane.showMessageDialog(null, "No se encontraron Quickpass para la filial especificada.");
         }
     }
+    
+    //#3
+    
+        public int obtenerTotalAccesos() {
+        int totalAccesos = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader("Historial.txt"))) {
+            while (br.readLine() != null) {
+                totalAccesos++;
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+        return totalAccesos;
+    }
+
+ 
+    public int obtenerTotalAccesosPorFilial(String filial) {
+        int totalAccesosFilial = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader("Historial.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains("Filial: " + filial)) {
+                    totalAccesosFilial++;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+        return totalAccesosFilial;
+    }
+
+
+    public int obtenerTotalQuickpass() {
+        int totalQuickpass = 0;
+        for (Quickpass q : lista) {
+            if (q != null) {
+                totalQuickpass++;
+            }
+        }
+        return totalQuickpass;
+    }
+
+    
+    public int[] obtenerQuickpassPorEstado() {
+        int activos = 0, inactivos = 0;
+        for (Quickpass q : lista) {
+            if (q != null) {
+                if (q.getEstado() == Estado.Activo) {
+                    activos++;
+                } else if (q.getEstado() == Estado.Inactivo) {
+                    inactivos++;
+                }
+            }
+        }
+        return new int[]{activos, inactivos};
+    }
+
+
+    public int obtenerTotalQuickpassEliminados(ListQuickpass eliminados) {
+        return eliminados.obtenerTotalQuickpass();
+    }
+
 
 }
