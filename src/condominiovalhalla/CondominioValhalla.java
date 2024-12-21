@@ -26,8 +26,8 @@ public class CondominioValhalla {
                     + "6. Inactivar un QuickPass\n"
                     + "7. Activar un QuickPass\n"
                     + "8. Registrar un acceso\n"
-                    + "9. Consultar historial:\n"
-                    + "10. Consultar reportes:\n"
+                    + "9. Consultar historial\n"
+                    + "10. Consultar reportes\n"
                     + "0. Salir\n"
                     + "Seleccione una opción:"));
 
