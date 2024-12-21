@@ -9,3 +9,4 @@ Código: 1014567897; Placa: 000; Filial: AYM; Condición: Aceptado; Fecha: 06/12
 Código: 1014567897; Placa: 000; Filial: AYM; Condición: Rechazado; Fecha: 06/12/2024 19:57
 Código: 1014567897; Placa: 000; Filial: AYM; Condición: Aceptado; Fecha: 06/12/2024 19:57
 Código: 1012020202; Placa: NS200; Filial: DBZ; Condición: Aceptado; Fecha: 20/12/2024 17:39
+Código: 1014567897; Placa: TESTP; Filial: TEST; Condición: Aceptado; Fecha: 20/12/2024 18:27

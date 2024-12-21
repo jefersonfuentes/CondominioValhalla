@@ -27,7 +27,7 @@ public class CondominioValhalla {
                     + "7. Activar un QuickPass\n"
                     + "8. Registrar un acceso\n"
                     + "9. Consultar historial:\n"
-                    + "10. Consultar historial:\n"
+                    + "10. Consultar reportes:\n"
                     + "0. Salir\n"
                     + "Seleccione una opción:"));
 
@@ -212,7 +212,7 @@ public class CondominioValhalla {
 
 
                 case 0: // Salir
-                    JOptionPane.showMessageDialog(null, "Saliendo del sistema. ¡Hasta pronto!");
+                    JOptionPane.showMessageDialog(null, "Saliendo del sistema. ¡Hasta pronto!\nGrupo 06");
                     break;
 
                 default:
